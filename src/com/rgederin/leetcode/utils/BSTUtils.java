@@ -1,6 +1,6 @@
 package com.rgederin.leetcode.utils;
 
-public class BSTUtils {
+public final class BSTUtils {
 
     /**
      * Insert new node with given value in BST
