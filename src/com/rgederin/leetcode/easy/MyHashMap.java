@@ -1,8 +1,8 @@
 package com.rgederin.leetcode.easy;
 
 /**
- * Runtime: 27 ms, faster than 33.77% of Java online submissions for Design HashMap.
- * Memory Usage: 41.8 MB, less than 100.00% of Java online submissions for Design HashMap.
+ * Runtime: 26 ms, faster than 34.27% of Java online submissions for Design HashMap.
+ * Memory Usage: 42.2 MB, less than 100.00% of Java online submissions for Design HashMap.
  */
 public class MyHashMap {
     private static final int NUMBER_OF_BUCKETS = 16;
@@ -26,7 +26,7 @@ public class MyHashMap {
             Node current = buckets[index];
 
             while (current != null) {
-                if (current.hash == hash && current.key == key) {
+                if (current.hash == hash) {
                     current.value = value;
                     return;
                 }
@@ -51,7 +51,7 @@ public class MyHashMap {
             Node current = buckets[index];
 
             while (current != null) {
-                if (current.hash == hash && current.key == key) {
+                if (current.hash == hash) {
                     return current.value;
                 }
                 current = current.next;
@@ -77,7 +77,7 @@ public class MyHashMap {
         Node current = buckets[index];
         Node previous = null;
         while (current != null) {
-            if (current.hash == hash && current.key == key) {
+            if (current.hash == hash) {
                 if (previous == null) {
                     buckets[index] = current.next;
                     return;
