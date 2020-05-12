@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 public final class DFSUtils {
 
     /**
-     * In order depth first search traversal.
+     * In order depth first search traversal in binary tree.
      *
      *    1. Recursively traverse the left subtree
      *    2. Visit the root.
