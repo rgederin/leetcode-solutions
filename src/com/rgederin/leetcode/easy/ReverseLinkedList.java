@@ -2,6 +2,10 @@ package com.rgederin.leetcode.easy;
 
 import com.rgederin.leetcode.utils.ListNode;
 
+/**
+ * Runtime: 0 ms, faster than 100.00% of Java online submissions for Reverse Linked List.
+ * Memory Usage: 40.3 MB, less than 8.07% of Java online submissions for Reverse Linked List.
+ */
 public class ReverseLinkedList {
 
     public static ListNode reverseList(ListNode head) {
