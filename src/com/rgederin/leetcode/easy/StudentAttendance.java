@@ -19,7 +19,6 @@ public class StudentAttendance {
             if (ch == 'P') l = 0;
             if (a > 1) return false;
             if (l > 2) return false;
-
         }
 
         return true;
