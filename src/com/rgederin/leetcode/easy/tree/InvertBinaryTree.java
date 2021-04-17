@@ -21,16 +21,16 @@ public class InvertBinaryTree {
     }
 
     private void bfsWithInversion(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
 
         while (!queue.isEmpty()) {
             //remove node from queue
             TreeNode treeNode = queue.poll();
-
-            if (treeNode == null) {
-                return;
-            }
 
             swapChildren(treeNode);
 
