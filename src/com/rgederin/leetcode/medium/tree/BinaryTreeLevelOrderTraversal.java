@@ -3,7 +3,9 @@ package com.rgederin.leetcode.medium.tree;
 import com.rgederin.leetcode.utils.TreeNode;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * 102. Binary Tree Level Order Traversal
@@ -13,20 +15,58 @@ import java.util.List;
  */
 public class BinaryTreeLevelOrderTraversal {
 
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        return levelOrderBfsQueue(root);
+    }
+
+    /**
+     * Runtime: 0 ms, faster than 100.00% of Java online submissions for Binary Tree Level Order
+     * Traversal. Memory Usage: 39.2 MB, less than 54.22% of Java online submissions for Binary Tree
+     * Level Order Traversal.
+     */
+    private List<List<Integer>> levelOrderBfsQueue(TreeNode root) {
+        List<List<Integer>> levels = new ArrayList<>();
+
+        if (root == null) {
+            return levels;
+        }
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            List<Integer> levelList = new ArrayList<>();
+            int size = queue.size();
+
+            for (int i = 0; i < size; i++) {
+                TreeNode treeNode = queue.poll();
+
+                if (treeNode.left != null) {
+                    queue.add(treeNode.left);
+                }
+                if (treeNode.right != null) {
+                    queue.add(treeNode.right);
+                }
+
+                levelList.add(treeNode.val);
+            }
+            levels.add(levelList);
+        }
+        return levels;
+    }
+
     /**
      * Runtime: 3 ms, faster than 6.67% of Java online submissions for Binary Tree Level Order
      * Traversal. Memory Usage: 39.1 MB, less than 69.24% of Java online submissions for Binary Tree
      * Level Order Traversal
      */
-    public List<List<Integer>> levelOrder(TreeNode root) {
+    private List<List<Integer>> levelOrderBfsRecursion(TreeNode root) {
         int h = height(root);
 
         List<List<Integer>> result = new ArrayList<>();
         for (int i = 1; i <= h; i++) {
             List<Integer> list = new ArrayList<>();
-
             visitLevel(root, i, list);
-
             result.add(list);
         }
 
@@ -37,7 +77,7 @@ public class BinaryTreeLevelOrderTraversal {
      * Compute the "height" of a tree -- the number of nodes along the longest path from the root
      * node down to the farthest leaf node.
      */
-    int height(TreeNode root) {
+    private int height(TreeNode root) {
         if (root == null) {
             return 0;
         } else {
@@ -50,7 +90,9 @@ public class BinaryTreeLevelOrderTraversal {
         }
     }
 
-    /* Visit nodes at the given level */
+    /**
+     * Visit nodes at the given level
+     */
     void visitLevel(TreeNode root, int level, List<Integer> list) {
         if (root == null) {
             return;
