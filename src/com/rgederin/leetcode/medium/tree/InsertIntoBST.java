@@ -4,6 +4,7 @@ import com.rgederin.leetcode.utils.TreeNode;
 
 /**
  * 701. Insert into a Binary Search Tree
+
  */
 public class InsertIntoBST {
 

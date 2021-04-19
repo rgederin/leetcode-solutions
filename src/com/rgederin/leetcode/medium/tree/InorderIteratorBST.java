@@ -1,4 +1,4 @@
-package com.rgederin.leetcode.medium;
+package com.rgederin.leetcode.medium.tree;
 
 import com.rgederin.leetcode.utils.TreeNode;
 
