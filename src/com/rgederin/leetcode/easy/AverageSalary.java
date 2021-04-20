@@ -1,4 +1,4 @@
-package com.rgederin.leetcode;
+package com.rgederin.leetcode.easy;
 
 import java.util.Arrays;
 
@@ -28,5 +28,4 @@ public class AverageSalary {
 
         return sum / (salary.length - 2);
     }
-
 }

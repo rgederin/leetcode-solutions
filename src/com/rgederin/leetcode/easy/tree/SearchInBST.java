@@ -1,4 +1,4 @@
-package com.rgederin.leetcode.easy;
+package com.rgederin.leetcode.easy.tree;
 
 import com.rgederin.leetcode.utils.BSTUtils;
 import com.rgederin.leetcode.utils.TreeNode;
