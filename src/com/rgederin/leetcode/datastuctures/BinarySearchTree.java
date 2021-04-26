@@ -170,6 +170,7 @@ class Driver {
         tree.insert(6, "Misha", false);
 
         System.out.println(tree.search(8, false));
+        //Collections.sort();
 
     }
 }
