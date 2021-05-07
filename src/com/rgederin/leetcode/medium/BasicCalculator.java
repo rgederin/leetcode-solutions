@@ -1,112 +1,108 @@
 package com.rgederin.leetcode.medium;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
+
 public class BasicCalculator {
+
+    /**
+     * Runtime: 15 ms, faster than 20.81% of Java online submissions for Basic Calculator II. Memory
+     * Usage: 40.7 MB, less than 21.52% of Java online submissions for Basic Calculator II.
+     */
     public int calculate(String s) {
-        // Stack for numbers: 'values'
+        //split char array to individual tokens
+        char[] tokens = s.toCharArray();
+
+        // stack for numbers
         Stack<Integer> values = new Stack<>();
 
-        // Stack for Operators: 'ops'
-        Stack<String> operators = new Stack<>();
+        // stack for operators: 'ops'
+        Stack<Character> operators = new Stack<>();
 
-
-        for (String string : parse(s)) {
-            if (!isOperator(string)) {
-                values.push(Integer.valueOf(string));
+        for (int i = 0; i < tokens.length; i++) {
+            //if current token is whitespace, skip it
+            if (tokens[i] == ' ') {
+                continue;
             }
 
-            else if (string.equals('(')) {
-                operators.push(string);
-            }
+            //if current token is digit - push it to the value stack
+            else if (isDigit(tokens[i])) {
+                StringBuffer sbuf = new StringBuffer();
 
-            else if (string.equals(')')){
-                while (operators.peek() != "("){
-                    values.push(applyOp(operators.pop(), values.pop(), values.pop()));
-                }
-            }
-
-            else if (isOperator(string)){
-                while (!operators.empty() && hasPrecedence(string, operators.peek())){
-                    values.push(applyOp(operators.pop(), values.pop(), values.pop()));
+                // There may be more than one digits in number
+                while (i < tokens.length && isDigit(tokens[i])) {
+                    sbuf.append(tokens[i++]);
                 }
 
-                operators.push(string);
+                values.push(Integer.parseInt(sbuf.toString()));
+
+                //normalise iteration
+                i--;
+            }
+
+            // Current token is an operator.
+            else if (isOperator(tokens[i])) {
+                // While top of 'ops' has same or greater precedence to current token, which is an operator.
+                // Apply operator on top of 'ops' to top two elements in values stack
+                while (!operators.empty() && hasPrecedence(tokens[i], operators.peek())) {
+                    values.push(applyOperation(operators.pop(), values.pop(), values.pop()));
+                }
+
+                // Push current token to 'ops'.
+                operators.push(tokens[i]);
             }
         }
 
-        while (!operators.isEmpty()){
-            values.push(applyOp(operators.pop(), values.pop(), values.pop()));
+        // Entire expression has been parsed at this point, apply remaining ops to remaining values
+        while (!operators.empty()) {
+            values.push(applyOperation(operators.pop(), values.pop(), values.pop()));
         }
 
+        // Top of 'values' contains result, return it
         return values.pop();
     }
+
+    private boolean isDigit(char ch) {
+        return ch >= '0' && ch <= '9';
+    }
+
 
     // Returns true if 'op2' has higher
     // or same precedence as 'op1',
     // otherwise returns false.
-    public static boolean hasPrecedence(String op1, String op2) {
-        if ((op1.equals("*") || op1.equals("/")) &&
-                (op2.equals("+") || op2.equals("-")))
+    public static boolean hasPrecedence(char op1, char op2) {
+
+        if ((op1 == '*' || op1 == '/') &&
+                (op2 == '+' || op2 == '-')) {
             return false;
-        else
+        } else {
             return true;
+        }
     }
 
-    // A utility method to apply an
-    // operator 'op' on operands 'a'
-    // and 'b'. Return the result.
-    public int applyOp(String op, int b, int a) {
+
+    public int applyOperation(char op, int b, int a) {
         switch (op) {
-            case "+":
+            case '+':
                 return a + b;
-            case "-":
+            case '-':
                 return a - b;
-            case "*":
+            case '*':
                 return a * b;
-            case "/":
-                if (b == 0)
+            case '/':
+                if (b == 0) {
                     throw new
                             UnsupportedOperationException(
                             "Cannot divide by zero");
+                }
                 return a / b;
         }
         return 0;
     }
 
-    private List<String> parse(String s) {
-        List<String> result = new ArrayList<>();
-        StringBuilder element = new StringBuilder();
-
-        for (char ch : s.toCharArray()) {
-            if (ch == ' ') {
-                continue;
-            }
-            if (isOperator(ch)) {
-                if (!element.equals("")) {
-                    result.add(String.valueOf(element).trim());
-                    element = new StringBuilder();
-                }
-                result.add(String.valueOf(ch));
-            } else {
-                element.append(ch);
-
-            }
-        }
-        result.add(String.valueOf(element).trim());
-
-        return result;
-    }
 
     private boolean isOperator(char ch) {
         return ch == '-' || ch == '+' || ch == '*' || ch == '/';
-    }
-
-    private boolean isOperator(String s) {
-        boolean result = s.equals("-") || s.equals("+") || s.equals("*") || s.equals("/");
-        return result;
     }
 
     public static void main(String[] args) {
