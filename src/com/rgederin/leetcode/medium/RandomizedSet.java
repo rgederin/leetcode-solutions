@@ -4,7 +4,8 @@ import java.util.Random;
 
 /**
  * Runtime: 18 ms, faster than 26.70% of Java online submissions for Insert Delete GetRandom O(1).
- * Memory Usage: 44.3 MB, less than 92.00% of Java online submissions for Insert Delete GetRandom O(1).
+ * Memory Usage: 44.3 MB, less than 92.00% of Java online submissions for Insert Delete GetRandom
+ * O(1).
  */
 class RandomizedSet {
 
@@ -106,8 +107,8 @@ class RandomizedSet {
     public int getRandom() {
         int random = index(new Random().nextInt(NUMBER_OF_BUCKETS));
 
-        while (true){
-            if (buckets[random] == null){
+        while (true) {
+            if (buckets[random] == null) {
                 random = index(new Random().nextInt(NUMBER_OF_BUCKETS));
             } else {
                 return buckets[random].key;
