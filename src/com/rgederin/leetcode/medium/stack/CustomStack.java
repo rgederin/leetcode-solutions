@@ -1,4 +1,4 @@
-package com.rgederin.leetcode.medium;
+package com.rgederin.leetcode.medium.stack;
 
 /**
  * Runtime: 5 ms, faster than 93.19% of Java online submissions for Design a Stack With Increment

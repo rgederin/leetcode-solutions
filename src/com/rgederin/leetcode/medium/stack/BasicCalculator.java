@@ -1,4 +1,4 @@
-package com.rgederin.leetcode.medium;
+package com.rgederin.leetcode.medium.stack;
 
 import java.util.Stack;
 
@@ -67,9 +67,7 @@ public class BasicCalculator {
     }
 
 
-    // Returns true if 'op2' has higher
-    // or same precedence as 'op1',
-    // otherwise returns false.
+    // Returns true if 'op2' has higher or same precedence as 'op1',otherwise returns false.
     public static boolean hasPrecedence(char op1, char op2) {
 
         if ((op1 == '*' || op1 == '/') &&
@@ -79,7 +77,6 @@ public class BasicCalculator {
             return true;
         }
     }
-
 
     public int applyOperation(char op, int b, int a) {
         switch (op) {
@@ -91,15 +88,12 @@ public class BasicCalculator {
                 return a * b;
             case '/':
                 if (b == 0) {
-                    throw new
-                            UnsupportedOperationException(
-                            "Cannot divide by zero");
+                    throw new UnsupportedOperationException("Cannot divide by zero");
                 }
                 return a / b;
         }
         return 0;
     }
-
 
     private boolean isOperator(char ch) {
         return ch == '-' || ch == '+' || ch == '*' || ch == '/';
